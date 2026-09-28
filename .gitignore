@@ -1,0 +1,48 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Unit test & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Extracted output artifacts
+out/
+*.dot
+*.out.json
+*.png
+
+# External dataset corpora & generated ML datasets
+COBOL_Files/
+results/datasets/
+results/raw/*.csv
+results/raw/*.txt
+results/tables/*.csv
+results/figures/*.pdf
+results/paper/
+results/results_log.md
+replication_package/
+replication_package.zip
+
+# Keep test fixture json files
+!tests/**/*.json
+
+# IDE / OS metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

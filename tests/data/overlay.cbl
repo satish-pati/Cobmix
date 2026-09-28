@@ -1,0 +1,17 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. OVERLAY-DEMO.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  WS-DATE.
+           05  WS-YEAR     PIC 9(4).
+           05  WS-MONTH    PIC 9(2).
+           05  WS-DAY      PIC 9(2).
+       01  WS-DATE-ALPHA REDEFINES WS-DATE PIC X(8).
+       66  WS-YMD RENAMES WS-YEAR THRU WS-DAY.
+       01  WS-TABLE.
+           05  WS-ITEM OCCURS 10 TIMES PIC X(3).
+       PROCEDURE DIVISION.
+       MAIN.
+           MOVE "20260101" TO WS-DATE-ALPHA
+           DISPLAY WS-YEAR
+           STOP RUN.

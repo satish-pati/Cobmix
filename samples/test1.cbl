@@ -1,0 +1,13 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. ADDNUM.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 A PIC 9(2) VALUE 10.
+       01 B PIC 9(2) VALUE 20.
+       01 C PIC 9(3).
+
+       PROCEDURE DIVISION.
+           ADD A B GIVING C.
+           DISPLAY "SUM = " C.
+           STOP RUN.

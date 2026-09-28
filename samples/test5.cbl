@@ -1,0 +1,21 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. EMP-TABLE.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 EMP-TABLE-DATA.
+          05 EMP-ENTRY OCCURS 10 TIMES.
+             10 EMP-ID   PIC 9(4).
+             10 EMP-NAME PIC X(20).
+             10 EMP-SAL  PIC 9(6)V99.
+       PROCEDURE DIVISION.
+       INIT-PARA.
+           MOVE ZEROS TO EMP-TABLE-DATA.
+           MOVE 1001 TO EMP-ID(1).
+           MOVE "ALICE SMITH" TO EMP-NAME(1).
+           MOVE 5000.00 TO EMP-SAL(1).
+           MOVE 1002 TO EMP-ID(2).
+           MOVE "BOB JONES" TO EMP-NAME(2).
+           MOVE 6000.00 TO EMP-SAL(2).
+           DISPLAY EMP-NAME(1).
+           DISPLAY EMP-NAME(2).
+           STOP RUN.

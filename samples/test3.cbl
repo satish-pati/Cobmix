@@ -1,0 +1,21 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. ITEM-CALC.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 ITEM-RECORD.
+          05 ITEM-CODE  PIC X(4).
+          05 ITEM-NAME  PIC X(20).
+          05 ITEM-QTY   PIC 9(5).
+          05 ITEM-PRICE PIC 9(7)V99.
+          05 ITEM-TOTAL PIC 9(9)V99.
+       01 GRAND-TOTAL   PIC 9(11)V99.
+       PROCEDURE DIVISION.
+       CALC-PARA.
+           MOVE "I001"     TO ITEM-CODE.
+           MOVE "WIDGET"   TO ITEM-NAME.
+           MOVE 10         TO ITEM-QTY.
+           MOVE 25.50      TO ITEM-PRICE.
+           COMPUTE ITEM-TOTAL = ITEM-QTY * ITEM-PRICE.
+           ADD ITEM-TOTAL TO GRAND-TOTAL.
+           DISPLAY ITEM-TOTAL.
+           STOP RUN.
