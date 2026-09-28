@@ -2,7 +2,7 @@
 
 ## 🎯 Tool Description
 
-**COBMix** is an advanced, COMEX-inspired multi-view code representation and graph extractor built specifically for legacy COBOL software systems. It parses COBOL programs—even incomplete code fragments or legacy programs with missing copybook definitions—and constructs rich syntactic, semantic, and architectural code property graphs.
+**COBMix** is an advanced multi-view code representation and graph extractor built specifically for legacy COBOL software systems. It parses COBOL programs—even incomplete code fragments or legacy programs with missing copybook definitions—and constructs rich syntactic, semantic, and architectural code property graphs.
 
 COBMix extracts six complementary code views: **Abstract Syntax Trees (AST)**, **Control Flow Graphs (CFG)**, **Data Flow Graphs (DFG)**, **Copybook Inclusion Hierarchies**, **Storage Overlay Structures** (level numbers, `REDEFINES`, `OCCURS`, `RENAMES`), and **Division Role Mappings**. By fusing these views into a unified multi-relational representation, COBMix bridges the gap between legacy enterprise codebases and modern program analysis, machine learning on code, graph neural networks (GNNs), software clone detection, and automated program comprehension.
 
