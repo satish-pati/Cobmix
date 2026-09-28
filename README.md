@@ -67,7 +67,6 @@ git clone https://github.com/RISHA-Lab/COBMix.git
 cd COBMix
 ```
 
-*(Or navigate to your local `COBMIX_Final` directory).*
 
 ### 2. Set Up a Virtual Environment
 
