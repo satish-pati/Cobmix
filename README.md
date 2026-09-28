@@ -63,10 +63,9 @@ Follow these steps to set up COBMix locally on your machine:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/RISHA-Lab/COBMix.git
-cd COBMix
+git clone https://github.com/satish-pati/Cobmix.git
+cd Cobmix
 ```
-
 
 ### 2. Set Up a Virtual Environment
 
@@ -134,7 +133,7 @@ COBMix can be used either as a command-line tool (`cobmix`) or as a Python libra
 
 ### How to Use *COBMix*
 
-1. **Prepare your COBOL source files** (`.cbl`, `.cob`) and any copybooks (`.cpy`) in a directory.
+1. **Prepare your COBOL source files** (`.cbl`, `.cob`) and any copybooks (`.cpy`) in a directory (e.g., `samples/find_max.cbl` and `samples/copy/MAXDATA.cpy`).
 2. **Select the desired code views** (`ast`, `cfg`, `dfg`, `copybook`, `overlay`, `division`).
 3. **Execute the extractor** via CLI or the Python API.
 4. **Inspect generated graphs** in JSON format for downstream ML tasks, or DOT/PNG for visual inspection.
@@ -146,30 +145,32 @@ COBMix can be used either as a command-line tool (`cobmix`) or as a Python libra
 
 #### 1. Full Multi-View Extraction (JSON, DOT, and PNG)
 
-Extract combined CFG, DFG, memory overlay, and copybook views:
+Extract combined CFG, DFG, AST, memory overlay, copybook, and division views for `find_max.cbl`:
 
 ```bash
-python -m cobmix --code-file samples/emp-main.cbl --copy-path samples/copy --graphs cfg,dfg,overlay,copybook --format all --output out/emp-main.json
+python -m cobmix --code-file samples/find_max.cbl --copy-path samples/copy --graphs cfg,dfg,ast,overlay,copybook,division --format all --output out/find_max.json
 ```
 
 This command generates both combined and individual view files:
 
 | File | Contents |
 |---|---|
-| `out/emp-main.json` | Full unified multi-relational graph (nodes, edges, attributes) |
-| `out/emp-main.dot` | Graphviz DOT source for combined figure (CFG + DFG + overlay + copybook) |
-| `out/emp-main.png` | Rendered combined diagram (Graphviz `dot` COMEX layout) |
-| `out/emp-main-cfg.png` / `.dot` | Control Flow Graph only |
-| `out/emp-main-dfg.png` / `.dot` | Data Flow Graph only |
-| `out/emp-main-overlay.png` / `.dot` | Storage overlay only |
-| `out/emp-main-copybook.png` / `.dot` | Copybook inclusion hierarchy only |
+| `out/find_max.json` | Full unified multi-relational graph (nodes, edges, attributes) |
+| `out/find_max.dot` | Graphviz DOT source for combined figure (CFG + DFG + overlay + copybook) |
+| `out/find_max.png` | Rendered combined diagram (Graphviz `dot` COMEX layout) |
+| `out/find_max-cfg.png` / `.dot` | Control Flow Graph only |
+| `out/find_max-dfg.png` / `.dot` | Data Flow Graph only |
+| `out/find_max-ast.png` / `.dot` | Abstract Syntax Tree only |
+| `out/find_max-overlay.png` / `.dot` | Storage overlay only |
+| `out/find_max-copybook.png` / `.dot` | Copybook inclusion hierarchy only |
+| `out/find_max-division.png` / `.dot` | Division role mappings only |
 
 #### 2. Paper-Style Combined Figure (CFG + DFG)
 
 Generate the classic COMEX-style control-flow and data-flow combined graph:
 
 ```bash
-python -m cobmix --code-file samples/emp-main.cbl --copy-path samples/copy --graphs cfg,dfg --format png --output out/cfg-dfg.png
+python -m cobmix --code-file samples/find_max.cbl --copy-path samples/copy --graphs cfg,dfg --format png --output out/cfg-dfg.png
 ```
 
 #### 3. Single-View Extraction
@@ -185,7 +186,7 @@ python -m cobmix --code-file samples/overlay-demo.cbl --graphs overlay --format 
 Export graph representations without rendering graphics:
 
 ```bash
-python -m cobmix --code-file samples/emp-main.cbl --copy-path samples/copy --graphs ast,cfg,dfg,copybook,overlay,division --format json --output out/emp-main.json
+python -m cobmix --code-file samples/find_max.cbl --copy-path samples/copy --graphs ast,cfg,dfg,copybook,overlay,division --format json --output out/find_max.json
 ```
 
 #### CLI Options Reference
@@ -209,10 +210,10 @@ from cobmix import CombinedDriver
 
 # Initialize and extract code views
 driver = CombinedDriver(
-    src_code=open("samples/emp-main.cbl", encoding="utf-8").read(),
+    src_code=open("samples/find_max.cbl", encoding="utf-8").read(),
     copy_paths=["samples/copy"],
-    graphs=["cfg", "dfg", "overlay", "copybook"],
-    output_file="out/emp-main.json",
+    graphs=["cfg", "dfg", "overlay", "copybook", "ast", "division"],
+    output_file="out/find_max.json",
     graph_format="all",  # writes JSON, DOT, and PNG
 )
 
@@ -224,6 +225,7 @@ print(f"Total Edges: {graph.number_of_edges()}")
 # Access individual view subgraphs
 cfg_view = driver.views.get("cfg")
 dfg_view = driver.views.get("dfg")
+ast_view = driver.views.get("ast")
 ```
 
 ---
@@ -241,7 +243,7 @@ dfg_view = driver.views.get("dfg")
 | `overlay` | Memory layout and storage aliasing | Level numbers (`01`–`49`), `REDEFINES`, `OCCURS`, `RENAMES` |
 | `division` | Program architectural roles | `IDENTIFICATION`, `ENVIRONMENT`, `DATA`, `PROCEDURE` |
 
-For formal definitions of node types and edge semantics, see [docs/views.md](file:///d:/COBMIX_Final/docs/views.md).
+For formal definitions of node types and edge semantics, see [docs/views.md](docs/views.md).
 
 ### Diagram Visual Legend (PNG)
 
@@ -254,6 +256,40 @@ When rendered via Graphviz `dot`, COBMix employs standard color coding:
 - 🟪 **Pink Rectangles** – Paragraphs and section headers
 - ⬜ **White Rounded Boxes** – Procedure Division statements
 - 🟡 **Yellow Ellipses** – Data item names and variables
+
+---
+
+## 📸 Visualizations & Output Gallery (`find_max.cbl`)
+
+The following figures illustrate the real outputs generated by COBMix when analyzing [`samples/find_max.cbl`](samples/find_max.cbl) with [`samples/copy/MAXDATA.cpy`](samples/copy/MAXDATA.cpy).
+
+### 1. Unified Combined Code Property Graph
+Fuses control flow (red), data flow reaches (dashed blue), storage overlay (orange), and copybook inclusion (green) into a single heterogeneous code representation.
+![Combined Multi-View Graph](docs/images/find_max.png)
+
+### 2. Control Flow Graph (CFG)
+Models paragraph sequencing (`MAIN-PARA` → `COMPARE-PARA`), `PERFORM` calls, and conditional branching (`IF NUM1 > NUM2`).
+![Control Flow Graph](docs/images/find_max-cfg.png)
+
+### 3. Data Flow Graph (DFG)
+Traces definitions (`def`), usages (`use`), and reaching definition chains (`reaches`) across statements and aliased memory records.
+![Data Flow Graph](docs/images/find_max-dfg.png)
+
+### 4. Abstract Syntax Tree (AST)
+Captures the hierarchical grammar structure of divisions, sections, paragraphs, and statements.
+![Abstract Syntax Tree](docs/images/find_max-ast.png)
+
+### 5. Storage Overlay View
+Models data memory layout, hierarchy levels, and memory aliasing introduced by `REDEFINES` (e.g. `NUM-DATA` redefines `RAW-INPUT`).
+![Storage Overlay](docs/images/find_max-overlay.png)
+
+### 6. Copybook Inclusion Hierarchy
+Tracks modular dependencies and variable definitions originating inside external copybook files (`MAXDATA.cpy`).
+![Copybook Inclusion Hierarchy](docs/images/find_max-copybook.png)
+
+### 7. Division Role Mapping
+Annotates and groups syntax and semantic nodes according to their COBOL architectural division (`IDENTIFICATION`, `DATA`, `PROCEDURE`).
+![Division Role View](docs/images/find_max-division.png)
 
 ---
 
@@ -375,8 +411,9 @@ python eval/profile_constructs.py --corpus-dir <path-to-corpus>
 python eval/train_eval.py --task clone --conditions all --seeds 5
 ```
 
-See [eval/README.md](file:///d:/COBMIX_Final/eval/README.md) for full execution phases, gate criteria, and paper replication guidelines.
+See [eval/README.md](eval/README.md) for full execution phases, gate criteria, and paper replication guidelines.
 
 ---
 
 ## 👥 Contributors
+

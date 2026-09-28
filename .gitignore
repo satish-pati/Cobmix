@@ -25,6 +25,7 @@ out/
 *.dot
 *.out.json
 *.png
+!docs/images/*.png
 
 # External dataset corpora & generated ML datasets
 COBOL_Files/

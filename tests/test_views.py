@@ -154,8 +154,8 @@ def test_cli_sample(tmp_path):
     from cobmix.cli import main
 
     out = tmp_path / "cli.json"
-    sample = ROOT.parent / "samples" / "emp-main.cbl"
-    copies = ROOT.parent / "samples" / "copy"
+    sample = DATA / "emp-main.cbl"
+    copies = DATA / "copy"
     rc = main(
         [
             "--code-file",
@@ -184,8 +184,8 @@ def _stmt_by_text(g, snippet: str):
 
 
 def test_sample_emp_main_dfg_does_not_alias_independent_records():
-    sample = ROOT.parent / "samples" / "emp-main.cbl"
-    copies = ROOT.parent / "samples" / "copy"
+    sample = DATA / "emp-main.cbl"
+    copies = DATA / "copy"
     driver = CombinedDriver(
         src_code=sample.read_text(encoding="utf-8"),
         code_file=sample,
@@ -221,8 +221,8 @@ def test_sample_emp_main_dfg_does_not_alias_independent_records():
 def test_sample_combined_png_omits_def_use_fans(tmp_path):
     from cobmix.utils.graph import visualization_graph
 
-    sample = ROOT.parent / "samples" / "emp-main.cbl"
-    copies = ROOT.parent / "samples" / "copy"
+    sample = DATA / "emp-main.cbl"
+    copies = DATA / "copy"
     out = tmp_path / "emp-main.json"
     driver = CombinedDriver(
         src_code=sample.read_text(encoding="utf-8"),
@@ -276,8 +276,8 @@ def test_visualization_graph_omits_def_use_fans_no_png():
     """visualization_graph() must strip def/use edges even without Graphviz."""
     from cobmix.utils.graph import visualization_graph
 
-    sample = ROOT.parent / "samples" / "emp-main.cbl"
-    copies = ROOT.parent / "samples" / "copy"
+    sample = DATA / "emp-main.cbl"
+    copies = DATA / "copy"
     driver = CombinedDriver(
         src_code=sample.read_text(encoding="utf-8"),
         code_file=sample,
