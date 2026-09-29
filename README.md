@@ -1,9 +1,5 @@
 # COBMix – Customized Multi-View Code Representation Extractor for COBOL
 
-[![PyPI version](https://img.shields.io/pypi/v/cobmix.svg)](https://pypi.org/project/cobmix/0.1.0/)
-[![Python Versions](https://img.shields.io/pypi/pyversions/cobmix.svg)](https://pypi.org/project/cobmix/)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/cobmix.svg)](https://pypi.org/project/cobmix/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🎯 Tool Description
 
