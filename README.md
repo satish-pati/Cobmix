@@ -68,7 +68,7 @@ COBMix extracts six complementary code views: **Abstract Syntax Trees (AST)**, *
 COBMix is published on [PyPI (Python Package Index)](https://pypi.org/project/cobmix/0.1.0/) and can be installed directly with `pip`:
 
 ```bash
-pip install cobmix
+pip install cobmix==0.1.0
 ```
 
 Verify your installation:
