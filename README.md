@@ -1,5 +1,10 @@
 # COBMix – Customized Multi-View Code Representation Extractor for COBOL
 
+[![PyPI version](https://img.shields.io/pypi/v/cobmix.svg)](https://pypi.org/project/cobmix/0.1.0/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/cobmix.svg)](https://pypi.org/project/cobmix/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/cobmix.svg)](https://pypi.org/project/cobmix/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## 🎯 Tool Description
 
 **COBMix** is an advanced multi-view code representation and graph extractor built specifically for legacy COBOL software systems. It parses COBOL programs—even incomplete code fragments or legacy programs with missing copybook definitions—and constructs rich syntactic, semantic, and architectural code property graphs.
@@ -56,18 +61,35 @@ COBMix extracts six complementary code views: **Abstract Syntax Trees (AST)**, *
 
 ---
 
-## 📦 Local Installation
+## 📦 Installation
 
-Follow these steps to set up COBMix locally on your machine:
+### ⚡ Quick Install (via PyPI)
 
-### 1. Clone the Repository
+COBMix is published on [PyPI (Python Package Index)](https://pypi.org/project/cobmix/0.1.0/) and can be installed directly with `pip`:
+
+```bash
+pip install cobmix
+```
+
+Verify your installation:
+```bash
+cobmix --help
+```
+
+---
+
+### 🛠️ Development Setup (from Source)
+
+Follow these steps if you want to set up COBMix locally from source for development or to reproduce the evaluation benchmarks:
+
+#### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/satish-pati/Cobmix.git
 cd Cobmix
 ```
 
-### 2. Set Up a Virtual Environment
+#### 2. Set Up a Virtual Environment
 
 **Windows (PowerShell):**
 ```powershell
@@ -81,7 +103,7 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Install Python Dependencies
+#### 3. Install Python Dependencies
 
 Install COBMix in editable mode along with development dependencies:
 
