@@ -9,7 +9,7 @@ results/raw/*.csv outputs which are never evicted.
 
 Usage:
     python eval/run_pipeline.py --corpus-dir COBOL_Files/COBOL_Files
-    python eval/run_pipeline.py --corpus-dir COBOL_Files/COBOL_Files --seeds 3 --tasks naming
+    python eval/run_pipeline.py --corpus-dir COBOL_Files/COBOL_Files --seeds 10 --tasks naming
 """
 from __future__ import annotations
 
@@ -56,7 +56,7 @@ CONDITIONS: dict[str, list[str]] = {
     "C5_no_division": [v for v in ALL_VIEWS if v != "division"],
 }
 
-SEEDS      = [42, 123, 456, 789, 1337]
+SEEDS      = [42, 123, 456, 789, 1337, 2024, 3141, 9999, 12345, 54321]
 MAX_PATH_LEN  = 8
 MAX_PATHS     = 200
 EMBED_DIM     = 64
@@ -566,7 +566,7 @@ def main(argv=None):
     parser.add_argument("--tasks", default="naming,clone,classification",
                         help="Comma-separated subset of: naming,clone,classification")
     parser.add_argument("--conditions", default="all")
-    parser.add_argument("--seeds", type=int, default=5)
+    parser.add_argument("--seeds", type=int, default=10)
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args(argv)
 

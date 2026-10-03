@@ -23,7 +23,7 @@ Tasks:
   classification -- business rule identification (agreement F1 vs reference)
 
 Usage:
-    python eval/train_eval.py --task naming --conditions all --seeds 5
+    python eval/train_eval.py --task naming --conditions all --seeds 10
     python eval/train_eval.py --task clone  --condition C5  --seeds 1
 """
 from __future__ import annotations
@@ -75,7 +75,7 @@ CONDITIONS: dict[str, list[str]] = {
     "C5_no_division": [v for v in ALL_VIEWS if v != "division"],
 }
 
-SEEDS = [42, 123, 456, 789, 1337]
+SEEDS = [42, 123, 456, 789, 1337, 2024, 3141, 9999, 12345, 54321]
 
 # ---------------------------------------------------------------------------
 # Path context extraction (code2vec style)
@@ -644,7 +644,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--task", required=True, help="naming, clone, or classification")
     parser.add_argument("--conditions", default="all",
                         help="Comma-separated list of conditions, or 'all'")
-    parser.add_argument("--seeds", type=int, default=5,
+    parser.add_argument("--seeds", type=int, default=10,
                         help="Number of seeds to evaluate")
     parser.add_argument("--data-dir", type=str, default="out/datasets")
     parser.add_argument("--out-dir", type=str, default="out/results/raw")

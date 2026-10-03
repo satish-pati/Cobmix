@@ -215,10 +215,10 @@ def graph_to_dot(g: nx.DiGraph, *, paper_style: bool = True) -> str:
     lines = [
         "digraph cobmix {",
         f'  graph [rankdir={rankdir} splines=true overlap=false concentrate=false newrank=true',
-        f'    nodesep={nodesep} ranksep={ranksep} bgcolor="white" fontname="Helvetica"',
-        f'    label="{_escape(title)}" labelloc=t fontsize=16];',
-        '  node [fontname="Helvetica" fontsize=10 color="#444444"];',
-        '  edge [fontname="Helvetica" fontsize=9 arrowsize=0.7 color="#444444"];',
+        f'    nodesep={nodesep} ranksep={ranksep} bgcolor="white" fontname="Helvetica-Bold"',
+        f'    label="{_escape(title)}" labelloc=t fontsize=18 fontcolor="black"];',
+        '  node [fontname="Helvetica" fontsize=12 fontcolor="black" color="#333333"];',
+        '  edge [fontname="Helvetica" fontsize=11 arrowsize=0.8 fontcolor="black" color="#444444"];',
     ]
 
     hide_data = (view == "dfg")
@@ -240,25 +240,25 @@ def graph_to_dot(g: nx.DiGraph, *, paper_style: bool = True) -> str:
         label = _node_label(nid, attrs)
         lines.append(
             f'{indent}"{_escape(nid)}" [label="{_escape(label)}" shape={shape} '
-            f'style="{style}" fillcolor="{fill}" margin="0.12,0.08"];'
+            f'style="{style}" fillcolor="{fill}" fontcolor="black" fontsize=12 margin="0.14,0.10"];'
         )
 
     if use_clusters and (buckets["procedure"] or buckets["data"] or buckets["copy"]):
         if buckets["copy"]:
             lines.append('  subgraph cluster_copy {')
-            lines.append('    label="Programs / copybooks"; color="#6aa84f"; style=rounded;')
+            lines.append('    label="Programs / copybooks"; fontcolor="black"; fontsize=14; fontname="Helvetica-Bold"; color="#4a7c36"; style=rounded;')
             for nid, attrs in buckets["copy"]:
                 emit_node(nid, attrs, "    ")
             lines.append("  }")
         if buckets["data"]:
             lines.append('  subgraph cluster_data {')
-            lines.append('    label="DATA DIVISION"; color="#bf9000"; style=rounded;')
+            lines.append('    label="DATA DIVISION"; fontcolor="black"; fontsize=14; fontname="Helvetica-Bold"; color="#997300"; style=rounded;')
             for nid, attrs in buckets["data"]:
                 emit_node(nid, attrs, "    ")
             lines.append("  }")
         if buckets["procedure"]:
             lines.append('  subgraph cluster_proc {')
-            lines.append('    label="PROCEDURE DIVISION"; color="#cc0000"; style=rounded;')
+            lines.append('    label="PROCEDURE DIVISION"; fontcolor="black"; fontsize=14; fontname="Helvetica-Bold"; color="#a80000"; style=rounded;')
             for nid, attrs in buckets["procedure"]:
                 emit_node(nid, attrs, "    ")
             lines.append("  }")
@@ -302,7 +302,7 @@ def graph_to_dot(g: nx.DiGraph, *, paper_style: bool = True) -> str:
             
         lines.append(
             f'  "{_escape(u)}" -> "{_escape(v)}" [label="{_escape(label)}" '
-            f'color="{color}" fontcolor="{color}" style={style} constraint={constraint}];'
+            f'color="{color}" fontcolor="black" fontsize=11 style={style} constraint={constraint}];'
         )
     # DFG-only view: one invisible edge forces DATA cluster above PROCEDURE.
     # With isolated nodes already pruned, this makes the graph compact and clean.
@@ -346,7 +346,7 @@ def graph_to_png(g: nx.DiGraph, path: str | Path) -> Path:
     bindir = str(Path(dot_exe).parent)
     env["PATH"] = bindir + os.pathsep + env.get("PATH", "")
     proc = subprocess.run(
-        [dot_exe, "-Tpng", "-Gdpi=150", "-o", str(path.resolve())],
+        [dot_exe, "-Tpng", "-Gdpi=200", "-o", str(path.resolve())],
         input=dot_text.encode("utf-8"),
         capture_output=True,
         check=False,

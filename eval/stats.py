@@ -4,7 +4,7 @@ eval/stats.py
 Phase 4 -- Statistical Analysis & Paper-Ready Output Generator
 
 Reads all results/raw/*.csv files, computes:
-  - Mean +/- std over 5 seeds per condition per task
+  - Mean +/- std over 10 seeds per condition per task
   - Paired Wilcoxon signed-rank tests (C5 vs C0, C5 vs C1)
   - Cliff's delta effect sizes
   - Bonferroni correction
@@ -307,7 +307,7 @@ def make_T4():
         out_table=TABLE / "T4_naming.csv",
         out_tex=PAPER / "tab_T4.tex",
         fig_out=FIG / "fig_naming_f1_boxplot.pdf",
-        caption=r"Paragraph naming subword F1 per condition ($\mu \pm \sigma$ over 5 seeds).",
+        caption=r"Paragraph naming subword F1 per condition ($\mu \pm \sigma$ over 10 seeds).",
         label="tab:naming",
         task="naming",
     )
@@ -355,7 +355,7 @@ def make_T5():
 
     _write_csv(out_rows, TABLE / "T5_clones.csv")
     _write_latex_task(out_rows, PAPER / "tab_T5.tex",
-                      r"Clone detection F1 by clone origin and condition.",
+                      r"Clone detection F1 by clone origin and condition ($\mu \pm \sigma$ over 10 seeds).",
                       "tab:clones")
     _plot_clone_f1(out_rows)
     print(f"  T5 written")
@@ -406,7 +406,7 @@ def _plot_clone_f1(rows):
 def make_T6():
     csv_file = "classification_metrics.csv" if (RAW / "classification_metrics.csv").exists() else "bizrule_metrics.csv"
     metric_col = "accuracy" if csv_file == "classification_metrics.csv" else "agreement_f1"
-    caption = r"Program classification accuracy per condition ($\mu \pm \sigma$ over 5 seeds)."
+    caption = r"Program classification accuracy per condition ($\mu \pm \sigma$ over 10 seeds)."
     label = "tab:classification"
     task = "classification"
     _make_task_table(

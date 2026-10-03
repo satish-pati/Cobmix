@@ -176,7 +176,7 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     conditions = CONDITIONS if args.condition == "all" else [CONDITIONS[int(args.condition)]]
-    seeds = [42, 123, 456, 789, 1337][:args.runs]
+    seeds = [42, 123, 456, 789, 1337, 2024, 3141, 9999, 12345, 54321][:args.runs]
 
     _write_machine_spec()
 

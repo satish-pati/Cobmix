@@ -59,9 +59,9 @@ Outputs: `results/datasets/naming/`, `results/datasets/clones/`, `results/datase
 ### Phase 3 — Model training & evaluation
 
 ```powershell
-python eval/train_eval.py --task naming  --conditions all --seeds 5
-python eval/train_eval.py --task clone   --conditions all --seeds 5
-python eval/train_eval.py --task bizrule --conditions all --seeds 5
+python eval/train_eval.py --task naming  --conditions all --seeds 10
+python eval/train_eval.py --task clone   --conditions all --seeds 10
+python eval/train_eval.py --task bizrule --conditions all --seeds 10
 ```
 
 Outputs: `results/raw/naming_metrics.csv`, `results/raw/clone_metrics.csv`, `results/raw/bizrule_metrics.csv`

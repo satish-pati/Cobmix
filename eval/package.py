@@ -163,11 +163,11 @@ python eval/build_clone_dataset.py  --corpus-dir corpus/
 python eval/build_biz_rule_dataset.py --corpus-dir corpus/
 ```
 
-### Step 5 — Train and evaluate (all conditions × 5 seeds)
+### Step 5 — Train and evaluate (all conditions × 10 seeds)
 ```bash
-python eval/train_eval.py --task naming  --conditions all --seeds 5
-python eval/train_eval.py --task clone   --conditions all --seeds 5
-python eval/train_eval.py --task bizrule --conditions all --seeds 5
+python eval/train_eval.py --task naming  --conditions all --seeds 10
+python eval/train_eval.py --task clone   --conditions all --seeds 10
+python eval/train_eval.py --task bizrule --conditions all --seeds 10
 ```
 
 ### Step 6 — Ablation and statistics
